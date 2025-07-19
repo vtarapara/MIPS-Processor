@@ -1,2 +1,13 @@
-# MIPS-Processor
-5-stage pipelined 32-bit MIPS processor written in Verilog for Duke ECE 350 Digital Systems Course.
+# 5-Stage MIPS Processor
+## NAME 
+Vivek Tarapara
+## Description of Design
+This design outlines a 32-bit pipelined processor embodying a five-stage pipeline architecture: Fetch, Decode, Execute, Memory, and Writeback. It adheres to a compact Instruction Set Architecture (ISA), facilitating arithmetic operations, branching, and memory manipulation instructions. The design is characterized by its modular approach, with its seperate pipeline stages and dedicated mechanisms for hazard resolution and instruction forwarding.
+## Bypassing
+The bypassing mechanism integrated within my processor's execute stage aims to minimize stalls caused by data hazards. The processor employs a comprehensive bypassing strategy that covers scenarios including WM (Writeback to Memory), WX (Writeback to Execute), and MX (Memory to Execute). This strategy is instrumental in resolving data dependencies dynamically, allowing operands to be forwarded directly to where they are needed next, thereby enhancing the instruction throughput and pipeline efficiency.
+## Stalling
+Stalling is applied within the processor to address situations where data dependencies or control flow changes cannot be resolved through bypassing alone. Key instances where stalling is implemented include interlock detection, branch handling, and multicycle operations. An advanced interlock detection mechanism identifies scenarios requiring stalls, notably after load instructions (lw) where subsequent instructions depend on the loaded data. A nop instruction is injected into the pipeline to safely delay instruction execution until the necessary data is available. Upon a branch decision (ctrl_branch flag), the pipeline effectively inserts nop instructions to prevent execution of instructions that fall into the branch delay slot. This ensures that branch outcomes are correctly resolved without executing unintended instructions. And for operations that span multiple cycles, such as multiplication and division, the processor employs a stalling mechanism that halts the pipeline progression to make sure that results from these long-latency instructions are accurately captured and utilized by subsequent instructions.
+## Optimizations
+Future revisions will focus on enhancing code readability and scalability by extracting bypassing and stalling logic into more modules. I made an effort to introduce clearer logic separations with the bypassing and stalling mechanisms, but I should aim to do that even better with the different stages themselves. Maybe in the future, potential expansions can be made to support an even wider array of operations that would boost the processor's versatility.
+## Bugs
+No known bugs are present in the current implementation.
