@@ -1,6 +1,4 @@
 # 5-Stage MIPS Processor
-## NAME 
-Vivek Tarapara
 ## Description of Design
 This design outlines a 32-bit pipelined processor embodying a five-stage pipeline architecture: Fetch, Decode, Execute, Memory, and Writeback. It adheres to a compact Instruction Set Architecture (ISA), facilitating arithmetic operations, branching, and memory manipulation instructions. The design is characterized by its modular approach, with its seperate pipeline stages and dedicated mechanisms for hazard resolution and instruction forwarding.
 ## Bypassing
